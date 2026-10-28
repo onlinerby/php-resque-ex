@@ -1,4 +1,4 @@
-## 1.3.4 (unreleased)
+## 1.3.4 (2026-10-28)
 
 * Replace deprecated `strftime()` calls with `date()` for worker and job timestamps.
 * Use logger methods supported by Monolog 1, 2 and 3.
