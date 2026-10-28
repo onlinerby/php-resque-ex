@@ -5,6 +5,34 @@ if (class_exists('Redis')) {
     {
         private static $defaultNamespace = 'resque:';
 
+        /**
+         * Redis connection host.
+         *
+         * @var string
+         */
+        protected $host;
+
+        /**
+         * Redis connection port.
+         *
+         * @var int
+         */
+        protected $port;
+
+        /**
+         * Connection timeout in seconds.
+         *
+         * @var int|float
+         */
+        protected $timeout;
+
+        /**
+         * Redis authentication password.
+         *
+         * @var string|null
+         */
+        protected $password;
+
         public function __construct($host, $port, $timeout = 5, $password = null)
         {
             parent::__construct();
