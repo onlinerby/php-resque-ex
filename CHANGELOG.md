@@ -1,3 +1,10 @@
+## 1.3.4 (2026-10-28)
+
+* Replace deprecated `strftime()` calls with `date()` for worker and job timestamps.
+* Use logger methods supported by Monolog 1, 2 and 3.
+* Fix the argument order of `implode()` in Redisent for PHP 8.
+* Declare the fork as a replacement for `kamisama/php-resque-ex` so dependent packages do not install both implementations.
+
 ## 1.3.0 (2014-01-28)
 
 * Fix #8: Performing a DB select when the DB is set to default '0' is not necessary and breaks Twemproxy
