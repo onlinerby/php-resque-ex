@@ -522,7 +522,7 @@ class Resque_Worker
     public function registerWorker()
     {
         Resque::redis()->sadd('workers', (string)$this);
-        Resque::redis()->set('worker:' . (string)$this . ':started', strftime('%a %b %d %H:%M:%S %Z %Y'));
+        Resque::redis()->set('worker:' . (string)$this . ':started', date('D M d H:i:s T Y'));
     }
 
     /**
@@ -556,7 +556,7 @@ class Resque_Worker
         $data = json_encode(
             array(
                 'queue' => $job->queue,
-                'run_at' => strftime('%a %b %d %H:%M:%S %Z %Y'),
+                'run_at' => date('D M d H:i:s T Y'),
                 'payload' => $job->payload
             )
         );
@@ -601,7 +601,7 @@ class Resque_Worker
             if ($this->logLevel === self::LOG_NORMAL && $code !== self::LOG_TYPE_DEBUG) {
                 fwrite($this->logOutput, "*** " . $message['message'] . "\n");
             } else if ($this->logLevel === self::LOG_VERBOSE) {
-                fwrite($this->logOutput, "** [" . strftime('%T %Y-%m-%d') . "] " . $message['message'] . "\n");
+                fwrite($this->logOutput, "** [" . date('H:i:s Y-m-d') . "] " . $message['message'] . "\n");
             } else {
                 return false;
             }
@@ -630,19 +630,19 @@ class Resque_Worker
             } else {
                 switch ($code) {
                     case self::LOG_TYPE_INFO:
-                        $this->logger->addInfo($message, $extra);
+                        $this->logger->info($message, $extra);
                         break;
                     case self::LOG_TYPE_WARNING:
-                        $this->logger->addWarning($message, $extra);
+                        $this->logger->warning($message, $extra);
                         break;
                     case self::LOG_TYPE_ERROR:
-                        $this->logger->addError($message, $extra);
+                        $this->logger->error($message, $extra);
                         break;
                     case self::LOG_TYPE_CRITICAL:
-                        $this->logger->addCritical($message, $extra);
+                        $this->logger->critical($message, $extra);
                         break;
                     case self::LOG_TYPE_ALERT:
-                        $this->logger->addAlert($message, $extra);
+                        $this->logger->alert($message, $extra);
                 }
             }
 
@@ -652,7 +652,7 @@ class Resque_Worker
             if ($this->logger === null) {
                 fwrite($this->logOutput, "[" . date('c') . "] " . $message . "\n");
             } else {
-                $this->logger->addDebug($message, $extra);
+                $this->logger->debug($message, $extra);
             }
         } else {
             return false;

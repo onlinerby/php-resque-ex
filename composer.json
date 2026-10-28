@@ -26,6 +26,9 @@
 			"Resque": "lib"
 		}
 	},
+	"replace": {
+		"kamisama/php-resque-ex": "self.version"
+	},
 	"suggest": {
 		"fresque/fresque": "A command line tool to manage your workers"
 	},
